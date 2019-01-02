@@ -1,17 +1,15 @@
 /*
-	Este código realiza un parpadeo de un pin del puerto B del Arduino Nano (LED interno)
+	Este cÃ³digo realiza un parpadeo de un pin del puerto B del Arduino Nano (LED interno)
 	donde cada intervalo de tiempo es gestionado por un temporizador configurado para los 
 	registros del TIMER 1.
 
-	Desarrollado por Angel Cházaro
+	Desarrollado por Angel ChÃ¡zaro
 */
 
 
 #define F_CPU 16000000UL
 #include <avr/io.h>
 #include <avr/interrupt.h>
-
-unsigned int Miliseg;
 
 int main (void)
 {
@@ -20,7 +18,7 @@ int main (void)
 	PORTB&=~0x20;	//EL LED INICIA APAGADO
 
 	TCCR1B= 0x05;	//TIMER 1 COMO TEMPORTIZADOR CON PRESCALADOR DE 256 en 0x04, con 0x05 es a 1024
-	TIMSK1= 0x01;	//INTERRUPCIÓN POR SOBREFLUJO
+	TIMSK1= 0x01;	//INTERRUPCIÃ“N POR SOBREFLUJO
 	
 	sei();	//SE HABILITAN INTERRUPCIONES GLOBALES
 
@@ -35,7 +33,7 @@ int main (void)
 
 ISR(TIMER1_OVF_vect)
 {
-	TCNT1=0xe17c;	//SE CARGA EL VALOR POR CADA INTERRUPCIÓN
-	PORTB^=0x20;	//EL LED CAMBIA DE ESTADO POR INTERRUPCIÓN OCURRIDA CADA 1 SEGUNDO
+	TCNT1=0xe17c;	//SE CARGA EL VALOR POR CADA INTERRUPCIÃ“N
+	PORTB^=0x20;	//EL LED CAMBIA DE ESTADO POR INTERRUPCIÃ“N OCURRIDA CADA 1 SEGUNDO
 }
 
